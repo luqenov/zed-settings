@@ -1,4 +1,3 @@
-~ ❯ ls ~/.local/share/zed/extensions/installed
-astro               biome            discord-presence  git-firefly    hyprlang     one-dark-darkened    tokyo-night
-basher              css-modules-kit  editorconfig      html           live-server  python-requirements
-bearded-icon-theme  darcula-dark     emmet             html-snippets  log          ssh-config
+astro               biome            discord-presence  git-firefly    hyprlang     one-dark-darkened  python-requirements
+basher              css-modules-kit  editorconfig      html           live-server  one-dark-pro       ssh-config
+bearded-icon-theme  darcula-dark     emmet             html-snippets  log          one-dark-pro-max   tokyo-night

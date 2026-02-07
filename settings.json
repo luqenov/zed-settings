@@ -4,7 +4,7 @@
   },
   "theme": {
     "mode": "dark",
-    "dark": "Darcula Dark",
+    "dark": "One Dark Pro Max",
     "light": "Ayu Light"
   },
   "icon_theme": "Bearded Icon Theme",
@@ -36,6 +36,8 @@
   "formatter": "language_server",
   "base_keymap": "VSCode",
   "hard_tabs": true,
+  "tab_size": 4,
+  "ensure_final_newline_on_save": true,
   "show_completions_on_input": true,
   "show_edit_predictions": true,
   "search": {
@@ -83,6 +85,15 @@
         "source.fixAll.biome": true,
         "source.organizeImports.biome": true
       }
+    },
+    "TSX": {
+      "formatter": {
+        "language_server": { "name": "biome" }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      }
     }
   },
   "lsp": {
@@ -107,7 +118,7 @@
             "functionLikeReturnTypes": { "enabled": true },
             "enumMemberValues": { "enabled": true }
           },
-          "quietDiagnostics": true 
+          "quietDiagnostics": true
         },
         "javascript": {
           "inlayHints": {
@@ -124,7 +135,12 @@
     },
     "biome": {
       "settings": {
-        "lint": { "enabled": false } 
+        "require_config_file": true,
+        "lint": { "enabled": true }
+      },
+      "binary": {
+        "path": "biome",
+        "arguments": ["lsp-proxy"]
       }
     }
   }
