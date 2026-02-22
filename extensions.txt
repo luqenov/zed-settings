@@ -1,3 +1,17 @@
-astro               biome            discord-presence  git-firefly    hyprlang     one-dark-darkened  python-requirements
-basher              css-modules-kit  editorconfig      html           live-server  one-dark-pro       ssh-config
-bearded-icon-theme  darcula-dark     emmet             html-snippets  log          one-dark-pro-max   tokyo-night
+astro
+basher
+bearded-icon-theme
+biome
+css-modules-kit
+darcula-dark
+discord-presence
+editorconfig
+emmet
+git-firefly
+html
+html-snippets
+live-server
+log
+one-dark-pro-max
+python-requirements
+ssh-config
