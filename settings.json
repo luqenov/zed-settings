@@ -108,7 +108,8 @@
  	"discord_presence": {
       "initialization_options": {
         "application_id": "1263505205522337886",
-        "state": "at {workspace}", 
+        "base_icons_url": "https://raw.githubusercontent.com/xhyrom/zed-discord-presence/main/assets/icons/",
+        "state": "in {workspace}", 
         "details": " {line_number} | {filename} | {file_size} ", 
         "large_image": "{base_icons_url}/{language:lo}.png",
         "large_text": "{language:u}",
