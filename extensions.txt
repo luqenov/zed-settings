@@ -10,6 +10,7 @@ emmet
 git-firefly
 html
 html-snippets
+hyprlang
 live-server
 log
 one-dark-pro-max
