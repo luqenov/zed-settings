@@ -1,4 +1,11 @@
 {
+  "ssh_connections": [
+    {
+      "host": "github.com",
+      "args": [],
+      "projects": []
+    }
+  ],
   "agent": {
     "favorite_models": [],
     "inline_assistant_model": {
