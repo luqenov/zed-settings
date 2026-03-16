@@ -122,6 +122,10 @@
         "large_text": "{language:u}",
         "small_image": "{base_icons_url}/zed.png",
         "small_text": "normies, OUT.",
+        "git_host_overrides": {
+          "github-b": "github.com",
+          "gitlab-work": "gitlab.corporation.com"
+        },
         "idle": {
           "timeout": 300,
           "action": "change_activity",  

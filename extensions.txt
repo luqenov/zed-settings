@@ -3,7 +3,6 @@ basher
 bearded-icon-theme
 biome
 css-modules-kit
-darcula-dark
 discord-presence
 editorconfig
 emmet
@@ -16,3 +15,4 @@ log
 one-dark-pro-max
 python-requirements
 ssh-config
+toml
