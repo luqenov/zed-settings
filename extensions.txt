@@ -4,6 +4,7 @@ bearded-icon-theme
 biome
 css-modules-kit
 discord-presence
+dockerfile
 editorconfig
 emmet
 git-firefly
