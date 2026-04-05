@@ -10,9 +10,9 @@ emmet
 git-firefly
 html
 html-snippets
-hyprlang
 live-server
 log
+macos-classic
 one-dark-pro-max
 python-requirements
 ssh-config
