@@ -3,48 +3,52 @@
     {
       "host": "github.com",
       "args": [],
-      "projects": []
-    }
+      "projects": [],
+    },
   ],
   "agent": {
     "favorite_models": [],
     "inline_assistant_model": {
       "provider": "google",
-      "model": "gemini-2.5-flash"
+      "model": "gemini-2.5-flash",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "prettier": {
-    "allowed": true
+    "allowed": true,
   },
   "theme": {
-    "mode": "dark",
+    "mode": "light",
     "dark": "One Dark Pro Max",
-    "light": "Ayu Light"
+    "light": "macOS Classic Light",
   },
-  "icon_theme": "Bearded Icon Theme",
+  "icon_theme": {
+    "mode": "light",
+    "light": "Bearded Icon Theme",
+    "dark": "Bearded Icon Theme"
+  },
   "ui_font_size": 16,
   "buffer_font_family": "FiraCode Nerd Font",
   "buffer_font_size": 14,
   "buffer_font_features": {
     "calt": true,
-    "ss01": true
+    "ss01": true,
   },
   "terminal": {
     "font_family": "JetBrainsMono Nerd Font",
-    "font_size": 14
+    "font_size": 14,
   },
   "current_line_highlight": "gutter",
   "rounded_selection": false,
   "show_whitespaces": "none",
   "minimap": {
-    "show": "never"
+    "show": "never",
   },
   "scrollbar": {
     "axes": {
       "horizontal": false,
-      "vertical": true
-    }
+      "vertical": true,
+    },
   },
   "wrap_guides": [100, 120],
   "soft_wrap": "editor_width",
@@ -56,86 +60,86 @@
   "show_completions_on_input": true,
   "show_edit_predictions": true,
   "search": {
-    "include_ignored": true
+    "include_ignored": true,
   },
   "status_bar": {
-    "experimental.show": true
+    "experimental.show": true,
   },
   "project_panel": {
     "hide_gitignore": false,
-    "auto_fold_dirs": false
+    "auto_fold_dirs": false,
   },
   "git": {
     "inline_blame": {
-      "show_commit_summary": true
-    }
+      "show_commit_summary": true,
+    },
   },
   "autosave": {
     "after_delay": {
-      "milliseconds": 500
-    }
+      "milliseconds": 500,
+    },
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "languages": {
     "Python": {
-      "language_servers": ["!ruff", "!pylsp", "!python-refactoring", "pyright"]
+      "language_servers": ["!ruff", "!pylsp", "!python-refactoring", "pyright"],
     },
     "JavaScript": {
       "formatter": {
-        "language_server": { "name": "biome" }
+        "language_server": { "name": "biome" },
       },
       "code_actions_on_format": {
         "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
+        "source.organizeImports.biome": true,
+      },
     },
     "TypeScript": {
       "formatter": {
-        "language_server": { "name": "biome" }
+        "language_server": { "name": "biome" },
       },
       "code_actions_on_format": {
         "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
+        "source.organizeImports.biome": true,
+      },
     },
     "TSX": {
       "formatter": {
-        "language_server": { "name": "biome" }
+        "language_server": { "name": "biome" },
       },
       "code_actions_on_format": {
         "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
-    }
+        "source.organizeImports.biome": true,
+      },
+    },
   },
   "lsp": {
- 	"discord_presence": {
+    "discord_presence": {
       "initialization_options": {
         "application_id": "1263505205522337886",
         "base_icons_url": "https://raw.githubusercontent.com/xhyrom/zed-discord-presence/main/assets/icons/",
-        "state": "in {workspace}", 
-        "details": " {line_number} | {filename} | {file_size} ", 
+        "state": "in {workspace}",
+        "details": " {line_number} | {filename} | {file_size} ",
         "large_image": "{base_icons_url}/{language:lo}.png",
         "large_text": "{language:u}",
         "small_image": "{base_icons_url}/zed.png",
         "small_text": "normies, OUT.",
         "idle": {
           "timeout": 300,
-          "action": "change_activity",  
+          "action": "change_activity",
           "state": "normies, OUT.",
           "details": "laying back, coding...",
           "large_image": "{base_icons_url}/zed.png",
           "large_text": "zzz",
           "small_image": "{base_icons_url}/idle.png",
-          "small_text": "zzz"
+          "small_text": "zzz",
         },
-       	"git_host_overrides": {
-        "github-b": "github.com",
-        "github.com": "github.com"
-       }
+        "git_host_overrides": {
+          "github-b": "github.com",
+          "github.com": "github.com",
+        },
       },
     },
     "pyright": {
@@ -143,10 +147,10 @@
         "python.analysis": {
           "typeCheckingMode": "off",
           "diagnosticSeverityOverrides": {
-            "reportOptionalMemberAccess": "none"
-          }
-        }
-      }
+            "reportOptionalMemberAccess": "none",
+          },
+        },
+      },
     },
     "vtsls": {
       "settings": {
@@ -157,9 +161,9 @@
             "variableTypes": { "enabled": true },
             "propertyDeclarationTypes": { "enabled": true },
             "functionLikeReturnTypes": { "enabled": true },
-            "enumMemberValues": { "enabled": true }
+            "enumMemberValues": { "enabled": true },
           },
-          "quietDiagnostics": true
+          "quietDiagnostics": true,
         },
         "javascript": {
           "inlayHints": {
@@ -168,21 +172,21 @@
             "variableTypes": { "enabled": true },
             "propertyDeclarationTypes": { "enabled": true },
             "functionLikeReturnTypes": { "enabled": true },
-            "enumMemberValues": { "enabled": true }
+            "enumMemberValues": { "enabled": true },
           },
-          "quietDiagnostics": true
-        }
-      }
+          "quietDiagnostics": true,
+        },
+      },
     },
     "biome": {
       "settings": {
         "require_config_file": true,
-        "lint": { "enabled": true }
+        "lint": { "enabled": true },
       },
       "binary": {
         "path": "/usr/bin/biome",
-        "arguments": ["lsp-proxy"]
-      }
-    }
-  }
+        "arguments": ["lsp-proxy"],
+      },
+    },
+  },
 }
