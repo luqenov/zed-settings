@@ -185,7 +185,7 @@
         "lint": { "enabled": true },
       },
       "binary": {
-        "path": "/usr/bin/biome",
+        "path": "/usr/local/bin/biome",
         "arguments": ["lsp-proxy"],
       },
     },
