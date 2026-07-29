@@ -1,7 +1,5 @@
 astro
-basher
 bearded-icon-theme
-biome
 css-modules-kit
 discord-presence
 dockerfile
@@ -12,6 +10,7 @@ html
 html-snippets
 live-server
 log
+lua
 macos-classic
 one-dark-pro-max
 python-requirements
