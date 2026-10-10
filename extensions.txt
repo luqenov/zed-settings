@@ -1,5 +1,6 @@
 astro
 bearded-icon-theme
+biome
 css-modules-kit
 discord-presence
 dockerfile
@@ -12,6 +13,7 @@ live-server
 log
 lua
 macos-classic
+mdx
 one-dark-pro-max
 python-requirements
 ssh-config
