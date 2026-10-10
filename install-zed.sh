@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zed"
 mkdir -p "$CONFIG_DIR"
+
+strip_block() {
+  awk '
+    skip { if ($0 ~ /\}/) skip = 0; next }
+    /"auto_install_extensions"/ { if ($0 !~ /\}/) skip = 1; next }
+    { print }
+  ' "$1"
+}
 
 if [ -f ./settings.json ]; then
   if [ -f "$CONFIG_DIR/settings.json" ]; then
@@ -28,30 +38,28 @@ for dir in themes snippets; do
   fi
 done
 
-# 2) Extensions.
 #    Zed has no CLI to install extensions, but it installs everything listed in
-#    the "auto_install_extensions" setting the next time it starts. So we add
-#    that block (built from extensions.txt) to the top of settings.json.
+#    the "auto_install_extensions" setting the next time it starts. So we build
+#    that block from extensions.txt and put it at the top of settings.json,
+#    replacing any older block so the list always matches extensions.txt.
 if [ -f ./extensions.txt ]; then
   [ -f "$CONFIG_DIR/settings.json" ] || printf '{\n}\n' > "$CONFIG_DIR/settings.json"
 
-  if grep -q '"auto_install_extensions"' "$CONFIG_DIR/settings.json"; then
-    echo "!! settings.json already has \"auto_install_extensions\" — skipping."
-    echo "Add the IDs from extensions.txt there manually if needed."
-  else
-    tmp="$(mktemp)"
-    {
-      echo '  "auto_install_extensions": {'
-      while read -r ext; do
-        [ -z "$ext" ] && continue
-        echo "    \"$ext\": true,"
-      done < ./extensions.txt
-      echo '  },'
-    } > "$tmp"
-    sed -i '0,/^{/r '"$tmp" "$CONFIG_DIR/settings.json"
-    rm -f "$tmp"
-    echo "-> auto_install_extensions added to settings.json"
-  fi
+  tmp="$(mktemp)"
+  strip_block "$CONFIG_DIR/settings.json" > "$tmp"
+  cp "$tmp" "$CONFIG_DIR/settings.json"
+
+  {
+    echo '  "auto_install_extensions": {'
+    while read -r ext; do
+      [ -z "$ext" ] && continue
+      echo "    \"$ext\": true,"
+    done < ./extensions.txt
+    echo '  },'
+  } > "$tmp"
+  sed -i '0,/^{/r '"$tmp" "$CONFIG_DIR/settings.json"
+  rm -f "$tmp"
+  echo "-> auto_install_extensions generated from extensions.txt"
 fi
 
 echo ""

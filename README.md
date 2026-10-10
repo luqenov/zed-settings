@@ -15,7 +15,7 @@ Both scripts use the default Zed paths (`~/.config/zed` and
 
 ## Backing up (after changing settings/extensions)
 
-Run from the root of this repo:
+Run from anywhere (the scripts always use the folder they live in):
 
 ```bash
 ./export-zed.sh
@@ -37,9 +37,17 @@ git push
 
 Zed doesn't have a command-line way to install extensions. Instead, it installs
 everything listed under the `auto_install_extensions` setting when it starts.
-`install-zed.sh` builds that block from `extensions.txt` and adds it to the top
-of your `settings.json` (your previous `settings.json` is saved as
-`settings.json.bak`). If the setting already exists, the script leaves it alone.
+
+- `extensions.txt` is the single source of truth for the list.
+- `export-zed.sh` strips the `auto_install_extensions` block from the
+  `settings.json` it saves, so the list never goes stale in the repo.
+- `install-zed.sh` generates a fresh block from `extensions.txt` and puts it at
+  the top of your `settings.json` (replacing any older one). Your previous
+  `settings.json` is saved as `settings.json.bak`.
+
+The block stays in your local `settings.json` afterwards. That's harmless: Zed
+only installs what is missing. To stop an extension from coming back after you
+uninstall it, remove its line from that block.
 
 ## Note: machine-specific paths
 

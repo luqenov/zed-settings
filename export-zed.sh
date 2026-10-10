@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 set -e
 
-# Run this script from inside your dotfiles repo
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zed"
 DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zed"
 
-# Zed keeps each installed extension in its own folder named after its ID.
+strip_block() {
+  awk '
+    skip { if ($0 ~ /\}/) skip = 0; next }
+    /"auto_install_extensions"/ { if ($0 !~ /\}/) skip = 1; next }
+    { print }
+  ' "$1"
+}
+
 if [ -d "$DATA_DIR/extensions/installed" ]; then
   ls -1 "$DATA_DIR/extensions/installed" > ./extensions.txt
   echo "-> ./extensions.txt ($(wc -l < ./extensions.txt) extensions)"
@@ -15,7 +22,7 @@ else
 fi
 
 if [ -f "$CONFIG_DIR/settings.json" ]; then
-  cp "$CONFIG_DIR/settings.json" ./settings.json
+  strip_block "$CONFIG_DIR/settings.json" > ./settings.json
   echo "-> ./settings.json"
 else
   echo "!! Could not find $CONFIG_DIR/settings.json"
