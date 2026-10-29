@@ -83,7 +83,3 @@ export XDG_DATA_HOME="$HOME/.local/share"
 ```
 
 Also, `settings.json` may contain a machine-specific Biome path. If needed, update it manually to match the binary location on your system.
-
-## License
-
-MIT
