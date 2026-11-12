@@ -30,22 +30,6 @@ cd zed-settings
 
 Close Zed before applying configuration changes. Then reopen it to apply settings and install enabled extensions. The scripts do not launch the editor, install fonts or authenticate AI providers.
 
-## Files
-
-| File | Purpose |
-| --- | --- |
-| `settings.json` | Editor, language-server, appearance and provider preferences |
-| `keymap.json` | Keyboard bindings |
-| `extensions.txt` | Enabled extension IDs, one per line |
-| `tasks.json` | Optional task definitions |
-| `themes/`, `snippets/` | Optional custom assets, including hidden files and empty directories |
-| `export-zed.sh` | Export the local configuration into this clone |
-| `install-zed.sh` | Install this clone's configuration or restore an installation backup |
-| `lib/` | Shared JSONC and transfer helpers; keep with both scripts |
-| `check.sh` | Validate files and run local tests |
-
-Optional files/directories are included when present. This repository tracks personal preferences; check the [machine requirements](docs/configuration.md) before using them elsewhere.
-
 ## Export your setup
 
 ```bash
