@@ -13,6 +13,7 @@ live-server
 log
 lua
 macos-classic
+make
 mdx
 one-dark-pro-max
 python-requirements
