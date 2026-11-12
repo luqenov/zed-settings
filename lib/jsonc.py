@@ -96,6 +96,11 @@ def set_root_property(text, key, value):
             start, end = key_token.start, last.end
             if comma:
                 end = comma.end
+                line_start = text.rfind('\n', 0, start) + 1
+                line_end = text.find('\n', end)
+                if (not text[line_start:start].strip() and line_end != -1
+                        and not text[end:line_end].strip()):
+                    start, end = line_start, line_end + 1
             elif position:
                 start = members[position - 1][4].start
             result = text[:start] + text[end:]

@@ -36,6 +36,11 @@ class JsoncTests(unittest.TestCase):
                 if 'note' in text:
                     self.assertIn('note', result)
 
+    def test_removal_preserves_surrounding_line_layout(self):
+        text = '{\n  "auto_install_extensions": {"astro": true},\n  "theme": "dark"\n}\n'
+        result = jsonc.set_root_property(text, 'auto_install_extensions', None)
+        self.assertEqual(result, '{\n  "theme": "dark"\n}\n')
+
     def test_only_replaces_root_property(self):
         text = '''// keep this header
 {"nested":{"auto_install_extensions":{"inner":true}},
