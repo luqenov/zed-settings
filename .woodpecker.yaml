@@ -1,0 +1,11 @@
+when:
+  - event: [push, pull_request, manual]
+    branch: main
+
+steps:
+  - name: verify
+    image: docker.io/library/debian:bookworm-slim
+    commands:
+      - apt-get update
+      - apt-get install -y --no-install-recommends bash python3 shellcheck ca-certificates
+      - ./check.sh
