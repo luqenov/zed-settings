@@ -2,84 +2,88 @@
 
 <div align="center">
 
-[![Shell](https://img.shields.io/badge/Shell-bash-121212?logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![Shell](https://img.shields.io/badge/Shell-Bash-121212?logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Zed](https://img.shields.io/badge/Editor-Zed-3b82f6)](https://zed.dev)
-[![Platform](https://img.shields.io/badge/Platform-Linux-18181b)](https://www.kernel.org/)
-[![License](https://img.shields.io/badge/License-MIT-0891b2)](LICENSE)
+![Platform](https://img.shields.io/badge/Platform-Linux-18181b)
+
+**Personal Zed settings, with previews and recoverable backups.**
+
+[Export](docs/export.md) · [Install and restore](docs/install.md) · [Configuration](docs/configuration.md) · [Checks](tests/README.md)
 
 </div>
 
-A lightweight backup-and-restore setup for your [Zed editor](https://zed.dev) configuration, keymaps, and installed extensions.
+Keep editor settings, keymaps and extensions together without rewriting configuration by line number. The scripts understand JSONC comments and trailing commas, validate inputs before changing configuration files, and preserve unrelated settings/comments.
 
-## Overview
+## Quick start
 
-This repository keeps the configuration files you usually want to carry between machines:
-
-- `settings.json` — editor settings
-- `keymap.json` — keyboard shortcuts
-- `extensions.txt` — extension list used for automatic installation
-- `tasks.json` — optional task definitions
-- `themes/` and `snippets/` — optional custom theme and snippet folders
-- `export-zed.sh` — saves your current Zed setup into this repo
-- `install-zed.sh` — restores the setup on another machine
-
-## Why this exists
-
-Zed does not provide a clean CLI for installing extensions directly, so the workflow here is:
-
-- export the installed extensions to `extensions.txt`
-- strip the auto-install block from your local `settings.json`
-- restore the managed configuration on a new machine
-- let Zed install the missing extensions automatically on startup
-
-## Backup
-
-Run this from any directory:
+Requires Bash and Python 3.9+. No pip packages, sudo or Zed CLI are needed by the transfer scripts.
 
 ```bash
-./export-zed.sh
-git add .
-git commit -m "zed: update settings and extensions"
-git push
-```
+git clone https://codeberg.org/luqenov/zed-settings.git
+cd zed-settings
 
-The export script reads from the default Zed paths:
-
-- `~/.config/zed`
-- `~/.local/share/zed`
-
-or the equivalents defined by `XDG_CONFIG_HOME` and `XDG_DATA_HOME`.
-
-## Restore on a new machine
-
-1. Install Zed.
-2. Clone this repository.
-3. Run:
-
-```bash
+# Inspect the changes before applying them.
+./install-zed.sh --dry-run
 ./install-zed.sh
 ```
 
-4. Open Zed and let it install the configured extensions on startup.
+Close Zed before applying configuration changes. Then reopen it to apply settings and install enabled extensions. The scripts do not launch the editor, install fonts or authenticate AI providers.
 
-## How extension restoration works
+## Files
 
-The key piece is the `auto_install_extensions` block in `settings.json`.
+| File | Purpose |
+| --- | --- |
+| `settings.json` | Editor, language-server, appearance and provider preferences |
+| `keymap.json` | Keyboard bindings |
+| `extensions.txt` | Enabled extension IDs, one per line |
+| `tasks.json` | Optional task definitions |
+| `themes/`, `snippets/` | Optional custom assets, including hidden files and empty directories |
+| `export-zed.sh` | Export the local configuration into this clone |
+| `install-zed.sh` | Install this clone's configuration or restore an installation backup |
+| `lib/` | Shared JSONC and transfer helpers; keep with both scripts |
+| `check.sh` | Validate files and run local tests |
 
-- `extensions.txt` is the source of truth for the extension list.
-- `export-zed.sh` removes the `auto_install_extensions` section before saving the repository version.
-- `install-zed.sh` regenerates that block from `extensions.txt` and inserts it at the top of `settings.json`.
-- If an older version exists, it is backed up as `settings.json.bak`.
+Optional files/directories are included when present. This repository tracks personal preferences; check the [machine requirements](docs/configuration.md) before using them elsewhere.
 
-This keeps the repository state clean while ensuring the local setup is restored exactly as expected.
-
-## Notes
-
-If your system uses non-default paths, make sure the environment variables are set before running the scripts:
+## Export your setup
 
 ```bash
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
+./export-zed.sh --dry-run
+./export-zed.sh
+git diff
 ```
 
-Also, `settings.json` may contain a machine-specific Biome path. If needed, update it manually to match the binary location on your system.
+Review the diff before committing, especially provider configuration, task commands and private machine details. Exporting does not commit or push anything.
+
+## Copy or mirror
+
+| Mode | Missing optional source entries | Themes and snippets |
+| --- | --- | --- |
+| Default | Keep destination entries | Merge; keep destination-only files |
+| `--mirror` | Remove managed destination entries absent from the source | Replace the managed trees exactly |
+
+Preview either mode with `--dry-run`. Neither mode deletes unrelated files in the repository or Zed configuration directory. A source `settings.json` is always required. See the [export](docs/export.md) and [install](docs/install.md) guides for exact behavior.
+
+## Backups and recovery
+
+Each operation that changes files creates a unique, private backup of the affected destination entries, including which entries did not previously exist. An unchanged run creates no backup. Previous backups are never reused.
+
+- Export backups: `.zed-backups/` inside this clone, ignored by Git.
+- Installation backups: `zed-settings-backups/` alongside the Zed configuration directory.
+
+```bash
+# Use the exact backup path printed by the original operation.
+./install-zed.sh --restore /absolute/path/to/backup --dry-run
+./install-zed.sh --restore /absolute/path/to/backup
+```
+
+Use `export-zed.sh --restore ...` for export backups. Restoration creates its own backup, so it can also be undone. Keep backups private: they can contain local credentials or task commands. See [recovery details](docs/install.md#recovery).
+
+## Local checks
+
+```bash
+./check.sh
+```
+
+Checks require ShellCheck in addition to Bash/Python. Tests use temporary repositories and XDG directories; they do not alter your editor configuration or call external APIs. [Test and CI guide](tests/README.md).
