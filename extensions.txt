@@ -1,6 +1,7 @@
 astro
 bearded-icon-theme
 biome
+comment
 css-modules-kit
 discord-presence
 dockerfile
@@ -17,5 +18,6 @@ make
 mdx
 one-dark-pro-max
 python-requirements
+scss
 ssh-config
 toml
